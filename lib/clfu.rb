@@ -18,9 +18,8 @@ class Clfu
   end
 
   def self.top(page = 0)
-    uri = @@base_uri + "/browse/sort-by-votes/"
-    uri += page * 25 if page > 1
-    uri += "/json"
+    uri = @@base_uri + "/browse/sort-by-votes/json/"
+    uri += (page * 25).to_s if page > 0
     response = get_response(uri)
     clfu_entries = build_entries(response)
   end
