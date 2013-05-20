@@ -10,16 +10,19 @@ require 'json'
 class Clfu
   @@base_uri = "http://www.commandlinefu.com/commands"
   
-  def self.matching(query)
+  def self.matching(query, format = :json)
+    # chop is necessary because encode64 tacks on a "\n"
     uri = @@base_uri + "/matching/" + query + "/" + Base64.encode64(query).chop + "/json" 
     response = open(uri).read
-    entries = build_entries(response, :json)
+    entries = build_entries(response, format)
   end
 
-  def self.top
-    uri = @@base_uri + "/browse/sort-by-votes/json"
+  def self.top(page = 0, format = :json)
+    uri = @@base_uri + "/browse/sort-by-votes/"
+    uri += page * 25 if page > 1
+    uri += "/json"
     response = open(uri).read
-    clfu_entries = build_entries(response, :json)
+    clfu_entries = build_entries(response, format)
   end
 
   def self.build_entries(response, format=:json)
