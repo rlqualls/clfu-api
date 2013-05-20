@@ -25,6 +25,12 @@ class Clfu
     clfu_entries = build_entries(response, format)
   end
 
+  def self.last_week
+    uri = @@base_uri + "/browse/last-week/sort-by-votes/json"
+    response = get_response(uri)
+    entries = build_entries(response, :json)
+  end
+
   def self.build_entries(response, format=:json)
     entries = []
     case format
