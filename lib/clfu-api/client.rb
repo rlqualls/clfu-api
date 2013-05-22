@@ -33,11 +33,11 @@ module Clfu
         entries = []
         json = JSON.parse(response)
         json.each do |item|
-        entry = Clfu::API::Entry.new(item["id"],
-                                     item["command"],
-                                     item["summary"],
-                                     item["votes"],
-                                     item["url"])
+        entry = Entry.new(item["id"],
+                           item["command"],
+                           item["summary"],
+                           item["votes"],
+                           item["url"])
         entries << entry
         end
         return entries
@@ -45,6 +45,9 @@ module Clfu
 
       def get_response(uri)
         response = open(uri).read
+      end
+
+      class Entry < Struct.new(:id, :command, :summary, :votes, :url)
       end
 
     end
