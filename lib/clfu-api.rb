@@ -14,6 +14,3 @@ module Clfu
 end
 
 require "clfu-api/client"
-require "clfu-api/entry"
-
-

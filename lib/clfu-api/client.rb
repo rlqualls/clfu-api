@@ -1,5 +1,3 @@
-require "clfu-api/entry"
-
 module Clfu
   module API
 
