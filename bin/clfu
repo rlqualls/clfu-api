@@ -1,1 +1,9 @@
-../lib/clfu-api/cli.rb
+#!/usr/bin/env ruby
+
+require_relative('../lib/clfu-api')
+
+args = ARGV.dup
+ARGV.clear
+command = args.shift.strip rescue 'help'
+
+Clfu::Cli.run(comand, args)
